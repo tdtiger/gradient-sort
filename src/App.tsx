@@ -8,7 +8,7 @@ import { sortLanes } from './data/sortLanes';
 import SortPanel from './components/sortPanel';
 import { useSortRace } from './hooks/useSortRace';
 
-// 90から30まで4ずつ小さくなっていくの数列を生成
+// 90から30まで4ずつ小さくなっていく数列を生成
 const lightnessValues: number[] = Array.from({length: 16}, (_, index) => 90 - (60 * index) / 15);
 
 export default function App() {
@@ -22,6 +22,7 @@ export default function App() {
         <Stack gap = "md">
           <Title order = {1} size = "h2">Gradient Sort</Title>
 
+          {/* 制御のためのボタン群を配置する部分 */}
           <div style = {{display: 'flex', flexWrap: 'wrap', gap: 8}}>
             <Button variant = "light" onClick = {shuffleAll}>
               全体をシャッフル
@@ -36,6 +37,7 @@ export default function App() {
             </Button>
           </div>
 
+          {/* 各ソート手法のカードを表示する部分 */}
           <SimpleGrid cols = {{base: 1, sm: 2}} spacing = "sm">
             {sortLanes.map((lane) => (
               <SortPanel

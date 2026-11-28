@@ -1,3 +1,4 @@
+// ソート手法を識別するためのID
 export type SortId =
     | 'bubble'
     | 'selection'
@@ -12,6 +13,7 @@ export type SortId =
 export type SortAlgorithm = (input: readonly number[])
     => Generator<number[], void, unknown>;
 
+// 状態を表すための型
 export type SortStatus =
     | 'idle'
     | 'running'

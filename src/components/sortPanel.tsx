@@ -1,4 +1,4 @@
-import { Button, Title } from '@mantine/core';
+import { Button, Card, Title } from '@mantine/core';
 import type { SortLane } from '../data/sortLanes';
 import type { SortStatus } from '../types/sort';
 
@@ -16,11 +16,15 @@ const statusLabels: Record<SortStatus, string> = {
     idle: '待機中', running: '実行中', done: '完了', stopped: '停止', error:'エラー'
 }
 
+// ソートごとの表示領域をカードで作成
 export default function SortPanel({lane, values, status, canRun, onRun, onStop, onShuffle}: SortPanelProps){
     const isRunning = (status === 'running');
 
     return(
-        <section style = {{minWidth: 0, padding: 12, border: '1px solid #dee2e6', borderRadius: 8}}>
+        <Card 
+            component = "section" withBorder padding = "sm" radius = "md" style = {{minWidth: 0}}
+        >
+            {/* ソート名と状態を表示する部分 */}
             <div style = {{
                 display: 'flex', justifyContent: 'space-between', alignItems: 'center',
                 gap: 8, marginBottom: 8
@@ -34,6 +38,7 @@ export default function SortPanel({lane, values, status, canRun, onRun, onStop, 
                 </span>
             </div>
 
+            {/* ボタン群を配置する部分 */}
             <div style = {{
                 display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 12
             }}>
@@ -50,6 +55,7 @@ export default function SortPanel({lane, values, status, canRun, onRun, onStop, 
                 </Button>
             </div>
 
+            {/* ソートするカラーバーを表示する部分 */}
             <div style = {{display: 'flex', gap: 2}}>
                 {values.map((lightness) => (
                     <div
@@ -61,6 +67,6 @@ export default function SortPanel({lane, values, status, canRun, onRun, onStop, 
                     />
                 ))}
             </div>
-        </section>
+        </Card>
     );
 }
