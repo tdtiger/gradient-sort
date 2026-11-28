@@ -7,6 +7,7 @@ import '@mantine/core/styles.css';
 import { sortLanes } from './data/sortLanes';
 import SortPanel from './components/sortPanel';
 import { bubbleSort } from './algorithms/bubbleSort';
+import { selectionSort } from './algorithms/selectionSort';
 import { shuffle } from './utils/shuffle';
 
 // 90から30まで4ずつ小さくなっていくの数列を生成
@@ -14,6 +15,7 @@ const lightnessValues: number[] = Array.from({length: 16}, (_, index) => 90 - (6
 
 export default function App() {
   const [bubbleValues, setBubbleValues] = useState<number[]>(lightnessValues);
+  const [selectionValues, setSelectionValues] = useState<number[]>(lightnessValues);
   const [isSorting, setIsSorting] = useState(false);
 
   function shuffleBubble(){
@@ -34,6 +36,35 @@ export default function App() {
     try{
       for(const values of bubbleSort(bubbleValues)){
         setBubbleValues(values);
+
+        await new Promise<void>((resolve) => {
+          setTimeout(resolve, 100);
+        });
+      }
+    }
+    finally{
+      setIsSorting(false);
+    }
+  }
+  
+  function shuffleSelection(){
+    if(isSorting){
+      return;
+    }
+
+    setSelectionValues(shuffle(selectionValues));
+  }
+
+  async function runSelectionSort(){
+    if(isSorting){
+      return;
+    }
+
+    setIsSorting(true);
+
+    try{
+      for(const values of selectionSort(selectionValues)){
+        setSelectionValues(values);
 
         await new Promise<void>((resolve) => {
           setTimeout(resolve, 100);
