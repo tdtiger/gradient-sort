@@ -1,6 +1,8 @@
+import type { SortId } from "../types/sort";
+
 // 各ソート区画を取り扱うための型
 export type SortLane = {
-    id: string;
+    id: SortId;
     name: string;
     hue: number;
 };
